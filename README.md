@@ -255,3 +255,123 @@ Contributions, issues và feature requests đều được chào đón!
 **Version**: 1.0.0  
 **Author**: Created for Java testing automation  
 **Last Updated**: 2025
+
+---
+
+## 🧪 PE Format Test Runner (pe_check.py)
+
+Công cụ thứ hai dùng để chấm theo định dạng PE với cấu trúc 4 bài (1, 2, 3, 4), mỗi bài chạy bằng file `.jar` đặt trong `run/`. Công cụ đọc một file `tests.txt` duy nhất cho cả 4 bài.
+
+### ✨ Tính năng chính
+
+- **Cấu trúc PE 4 bài**: `1/`, `2/`, `3/`, `4/`, mỗi bài có `src/` (code Java) và `run/` (đặt `.jar` để chạy)
+- **Một file tests.txt duy nhất**: gom test của 4 bài với khối `=== Q1 ===`, `=== Q2 ===`, ...
+- **Nhiều test case/bài**: đánh số `--- TC1 ---`, `--- TC2 ---`, ...
+- **Tự động chạy .jar**: tự dò `.jar` trong `run/` và chạy bằng `java -jar`
+- **Timeout 10 giây**: tránh chương trình treo
+- **So sánh linh hoạt**: `REMOVE_SPACES`, `CASE_SENSITIVE`
+- **Báo cáo đẹp**: hiển thị từng test case và tổng kết điểm
+
+### 📁 Cấu trúc thư mục yêu cầu
+
+```
+PE_Exam/
+├── 1/
+│   ├── src/      (code Java - không động vào)
+│   └── run/      (file .jar để chạy test)
+│       └── Q1.jar
+├── 2/
+│   ├── src/
+│   └── run/
+│       └── Q2.jar
+├── 3/
+│   ├── src/
+│   └── run/
+│       └── Q3.jar
+├── 4/
+│   ├── src/
+│   └── run/
+│       └── Q4.jar
+├── tests.txt     (file test cho cả 4 bài)
+└── pe_check.py   (tool Python - đặt ở đây)
+```
+
+### 📝 Định dạng tests.txt
+
+File `tests.txt` chứa lần lượt 4 khối câu hỏi. Mỗi khối bắt đầu bằng tiêu đề:
+
+- `=== Q1 ===`
+- `=== Q2 ===`
+- `=== Q3 ===`
+- `=== Q4 ===`
+
+Trong mỗi khối có nhiều test case, mỗi test case có dạng:
+
+```
+--- TC<number> ---
+INPUT:
+<nội_dung_input_có_thể_nhiều_dòng>
+OUTPUT:
+<kỳ_vọng_output>
+REMOVE_SPACES:
+YES|NO
+CASE_SENSITIVE:
+YES|NO
+MARK:
+<điểm_số>
+```
+
+Ví dụ rút gọn một test case:
+
+```
+--- TC1 ---
+INPUT:
+3
+Nguyen Van A
+20
+Male
+OUTPUT:
+Student: Nguyen Van A, Age: 20, Gender: Male
+REMOVE_SPACES:
+NO
+CASE_SENSITIVE:
+YES
+MARK:
+2.5
+```
+
+Lưu ý:
+- `REMOVE_SPACES: YES` sẽ loại toàn bộ khoảng trắng trước khi so sánh.
+- `CASE_SENSITIVE: NO` sẽ không phân biệt hoa/thường.
+- Tool chỉ lấy phần sau chữ `OUTPUT:` (nếu chương trình in kèm log trước đó).
+
+### 🚀 Cách chạy
+
+Windows PowerShell/CMD:
+
+```bash
+cd PE_Exam
+python pe_check.py
+```
+
+Tool sẽ kiểm tra đủ thư mục `1..4` và file `tests.txt`, sau đó chạy từng `.jar` tương ứng.
+
+### 🔍 Cách hoạt động
+
+- Tự động tìm file `.jar` trong thư mục `run/` của từng bài; ưu tiên tên có chứa `dist`, nếu không sẽ lấy file đầu tiên.
+- Chạy chương trình bằng `java -jar <jar_file>` với `timeout = 10s`.
+- Nếu output có chứa chuỗi `OUTPUT:`, chỉ phần sau đó được dùng để so sánh.
+- Tính điểm theo từng test case và tổng hợp điểm cuối.
+
+### 🧯 Troubleshooting (PE)
+
+- "Không tìm thấy file .jar": Kiểm tra đã build `.jar` và đặt vào `run/` đúng bài.
+- "TIMEOUT - Chương trình chạy quá 10 giây": Rà soát vòng lặp vô hạn, tối ưu I/O.
+- "Không tìm thấy tests.txt": Đặt file `tests.txt` cạnh `pe_check.py` theo đúng định dạng.
+- Java không chạy được: đảm bảo `java -version` hoạt động trong terminal.
+
+### 📦 File liên quan
+
+- `pe_check.py`: Trình chạy bài PE theo `.jar` và `tests.txt`.
+
+> Gợi ý: Bạn có thể copy mẫu nội dung `tests.txt` từ mục hướng dẫn trong repo hoặc từ đề thi để cập nhật nhanh.
