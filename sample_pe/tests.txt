@@ -1,0 +1,126 @@
+=== Q1 ===
+
+--- TC1 ---
+INPUT:
+3
+Nguyen Van A
+20
+Male
+OUTPUT:
+Student: Nguyen Van A, Age: 20, Gender: Male
+REMOVE_SPACES:
+NO
+CASE_SENSITIVE:
+YES
+MARK:
+2.5
+
+--- TC2 ---
+INPUT:
+2
+Tran Thi B
+22
+Female
+OUTPUT:
+Student: Tran Thi B, Age: 22, Gender: Female
+REMOVE_SPACES:
+NO
+CASE_SENSITIVE:
+YES
+MARK:
+2.5
+
+=== Q2 ===
+
+--- TC1 ---
+INPUT:
+5
+10 20 30 40 50
+OUTPUT:
+Sum: 150
+Average: 30.0
+REMOVE_SPACES:
+YES
+CASE_SENSITIVE:
+NO
+MARK:
+2.5
+
+--- TC2 ---
+INPUT:
+3
+5 10 15
+OUTPUT:
+Sum: 30
+Average: 10.0
+REMOVE_SPACES:
+YES
+CASE_SENSITIVE:
+NO
+MARK:
+2.5
+
+=== Q3 ===
+
+--- TC1 ---
+INPUT:
+4
+Apple
+Banana
+Cherry
+Date
+OUTPUT:
+[Apple, Banana, Cherry, Date]
+REMOVE_SPACES:
+YES
+CASE_SENSITIVE:
+YES
+MARK:
+2.5
+
+--- TC2 ---
+INPUT:
+2
+Orange
+Grape
+OUTPUT:
+[Orange, Grape]
+REMOVE_SPACES:
+YES
+CASE_SENSITIVE:
+YES
+MARK:
+2.5
+
+=== Q4 ===
+
+--- TC1 ---
+INPUT:
+3
+Java
+Python
+C++
+OUTPUT:
+Languages: Java, Python, C++
+REMOVE_SPACES:
+NO
+CASE_SENSITIVE:
+YES
+MARK:
+2.5
+
+--- TC2 ---
+INPUT:
+2
+JavaScript
+Ruby
+OUTPUT:
+Languages: JavaScript, Ruby
+REMOVE_SPACES:
+NO
+CASE_SENSITIVE:
+YES
+MARK:
+2.5
+
+
